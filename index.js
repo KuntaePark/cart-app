@@ -44,7 +44,31 @@ const rendering = () => {
     const p = document.createElement("p");
     p.innerText = list[i];
     const div = document.createElement("div");
+    div.onclick = () => {
+      p.innerText = "";
+      const modInput = document.createElement("input");
+      modInput.style.flex = 1;
+      modInput.style.border = "none";
+      modInput.style.borderRadius = "0";
+      modInput.style.borderBottom = "1px solid";
 
+      modInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          if (!modInput.value.length) {
+            alert("물건 이름을 입력하세요!");
+            modInput.value = list[i];
+            return modInput.focus();
+          }
+          list[i] = modInput.value;
+          db.setItem("list", JSON.stringify(list));
+          return rendering();
+        }
+      });
+
+      modInput.value = list[i];
+      p.append(modInput);
+      modInput.focus();
+    };
     div.append(p, button);
 
     const li = document.createElement("li");
