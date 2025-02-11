@@ -52,6 +52,7 @@ const rendering = () => {
       modInput.style.borderRadius = "0";
       modInput.style.borderBottom = "1px solid";
 
+      modInput.addEventListener("focusout", rendering);
       modInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
           if (!modInput.value.length) {
